@@ -1,0 +1,184 @@
+﻿body {
+    min-height: 100vh; /* 確保 body 高度等於視窗高度 */
+    margin: 10px; /* 外距 */
+    box-sizing: border-box;
+    padding: 20px;
+    font-size: max(16px, 1.5vw); /* 字體最小值 */
+    font-family: Arial, sans-serif;
+    color: #333; /* 文字顏色，確保對比度 */
+}
+
+.sidebar {
+    position: fixed;
+    display:flex;
+    flex-direction: column;
+    overflow-x:hidden;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 35px;
+    background: #290b10;
+    padding: 25px 20px;
+    transition: all 0.2s ease;
+}
+.sidebar:hover {
+
+    width: 230px;
+
+}
+.sidebar-header{
+    display: flex;
+    align-items:center;
+    color: #fff;
+}
+    .sidebar-header span {
+        margin-left: 8px;
+    }
+    .sidebar-header h2 {
+        font-size: 1.5em;
+        font-weight: 600;
+        margin-left: 27px;
+        white-space: nowrap;
+    }
+    .sidebar-links h4{
+        opacity:0;
+    }
+.sidebar:hover .sidebar-links h4{
+    opacity: 1;
+}
+
+    .sidebar-links h4{
+        color:#fff;
+        font-weight: 500;
+        margin: 10px 0;
+        white-space: nowrap;
+    }
+.sidebar-links{
+    list-style:none;
+    margin-top: 20px;
+    height: 100%;
+    padding: 0;
+}
+
+    .sidebar-links li a {
+        display: flex;
+        align-items: center;
+        gap: 0 25px;
+        color: #e5e4e4;
+        font-size: 0.9em;
+        font-weight: 500;
+        padding: 15px 5px;
+        white-space: nowrap;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: linear 1s;
+    }
+        .sidebar-links li a:hover {
+            background: #5d2932;
+            color: #fff;
+            transition: linear 0s;
+        }
+
+.video-container {
+    display: flex;
+    flex-wrap: wrap; /* 響應式排列 */
+    gap: 20px; /* 卡片間距 */
+    justify-content: center;
+}
+
+.video-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.8); /* 半透明背景，增加可讀性 */
+    padding: 15px;
+    max-width: 600px; /* 卡片最大寬度 */
+    text-align: center;
+    overflow: hidden;
+}
+
+.description {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border-radius: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: ease 0.3s;
+    background: linear-gradient(to bottom, #9f573e, #7b3c2c);
+    z-index: 1;
+    opacity: 0;
+}
+
+.video-card:hover .description {
+    opacity: 100%;
+}
+
+.video-card:active .description {
+    opacity: 0;
+}
+
+.video-card h2 {
+    font-size: max(18px, 2vw); /* 標題字體 */
+    color: white;
+    margin: 10px;
+}
+
+.video-card p {
+    font-size: max(14px, 1.2vw); /* 簡介字體 */
+    color: white;
+    margin: 10px
+}
+
+video {
+    display: inline;
+    width: 100%;
+    /*            max-width: 300px;
+            margin-top: 10px;*/
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+}
+
+/* 針對小螢幕 */
+@media screen and (max-width: 600px) {
+    body {
+        border-width: 2px;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+
+    .video-card {
+        max-width: 100%; /* 小螢幕時卡片寬度佔滿 */
+    }
+
+        .video-card h2 {
+            font-size: 16px;
+        }
+
+        .video-card p {
+            font-size: 14px;
+        }
+
+        .video-card button {
+            font-size: 14px;
+        }
+}
+
+/* 針對大螢幕 */
+@media screen and (min-width: 1200px) {
+    body {
+        border-width: 6px;
+        border-radius: 20px;
+        font-size: 18px;
+    }
+
+    .video-card h2 {
+        font-size: 20px;
+    }
+
+    .video-card p {
+        font-size: 16px;
+    }
+}
