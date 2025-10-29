@@ -9,7 +9,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 </head>
-<body>
+<body oncontextmenu="return false;">
+    <div class="navigation-overlay">
+        <div class="overlay-text">
+            <h3 style="margin: 25vh 6vw;">
+                <span class="material-symbols-outlined">
+                    arrow_left_alt
+                </span>可查看各類作品
+            </h3>
+            <h3 style="margin: 30vh 80vw;">
+                <span class="material-symbols-outlined">
+                    arrow_left_alt
+                </span>左鍵可觀看影片或開啟遊戲
+                <br />右鍵可放大圖像
+            </h3>
+        </div>
+    </div>
     <aside class="sidebar">
         <div class="sidebar-header">
             <span class="material-symbols-outlined">
@@ -20,44 +35,63 @@
         <ul class="sidebar-links">
             <h4>作品分類</h4>
             <li>
-                <button onclick="createVideo(videos, '動畫藝術類')">
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            movie
-                        </span>動畫藝術類
-                    </a>
-                </button>
+                <a href="#video-container">
+                    <span class="material-symbols-outlined">
+                        movie
+                    </span>動畫藝術類
+                </a>
             </li>
             <li>
-                <button onclick="createFile()">
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            stadia_controller
-                        </span>多媒體設計類
-                    </a>
-                </button>
+                <a href="#game-container">
+                    <span class="material-symbols-outlined">
+                        stadia_controller
+                    </span>多媒體設計類
+                </a>
             </li>
             <li>
-                <button onclick="createVideo(medias, '新媒體藝術類')">
-                    <a href="#">
-                        <span class="material-symbols-outlined">
-                            head_mounted_device
-                        </span>新媒體藝術類
-                    </a>
-                </button>
+                <a href="#media-container">
+                    <span class="material-symbols-outlined">
+                        head_mounted_device
+                    </span>新媒體藝術類
+                </a>
             </li>
         </ul>
     </aside>
     <div class="top-bar">
-        <h1 id="title"></h1>
+
     </div>
 
-    <div class="video-container" id="container"></div>
+    <div class="video-container" id="video-container">
+        <h1>動畫藝術類</h1>
+    </div>
+    <div class="game-container" id="game-container">
+        <h1>多媒體設計類</h1>
+    </div>
+    <div class="media-container" id="media-container">
+        <h1>新媒體藝術類</h1>
+    </div>
 
+
+    <div class="help-bar">
+        <div class="help-button">
+            <span class="material-symbols-outlined">
+                <img src="UI/0-11.png" width="50" />
+                question_mark
+            </span>
+
+        </div>
+    </div>
     <script>
         let videos = [], games = [], medias = [];
-        const container = document.getElementById("container");
+        let nowContainer;
+
+        const videoContainer = document.getElementById("video-container");
+        const gameContainer = document.getElementById("game-container");
+        const mediaContainer = document.getElementById("media-container");
+
         const title = document.getElementById("title");
+
+        nowContainer = videoContainer;
         fetch('https://raw.githubusercontent.com/AkiYaSshi/file-reviewer/master/works.json')
             .then(response => {
                 if (!response.ok) {
@@ -69,65 +103,56 @@
                 videos = data.videos;
                 games = data.games;
                 medias = data.medias;
-                createVideo(videos, "動畫藝術類");
-
+                createWorks(videos, videoContainer);
+                createWorks(games, gameContainer);
+                createWorks(medias, mediaContainer);
             })
             .catch(error => {
                 console.error("載入 JSON 失敗：", error);
                 title.textContent = "載入失敗";
-                container.innerHTML = "<p style='color:grey;'>無法載入作品資料</br>請工作人員聯繫網站程式</p>";
+                nowContainer.innerHTML = "<p style='color:grey;'>無法載入作品資料</br>請工作人員聯繫網站程式</p>";
             });
         // 動態生成影片卡片
 
-        function createVideo(type, newtitle) {
-            clear();
-            title.textContent = newtitle;
-            type.forEach((video, index) => {
-                const card = document.createElement("div");
-                card.className = "video-card";
-                card.innerHTML = `
-                                                 <a href="${video.url}">
-                                                     <div class = "description">
-                                                        <h2>${video.title}</h2>
-                                                        <p>${video.description}</p>
-                                                    </div>
-                                                    <img  width="480" height="270" id="video${index}" src="${video.cover}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
-                                                </a>
+        function createWorks(type, container) {
 
-                                                `;
+            type.forEach((work, index) => {
+                const card = document.createElement("div");
+                card.className = "work-card";
+                if (type == games) {
+                    card.innerHTML = `
+                                                            <div class = "description" title = "開啟遊戲檔案位置" onclick = "window.open('${work.path}');">
+                                                                <h2>${work.title}</h2>
+                                                                <p>${work.description}</p>
+                                                            </div>
+                                                            <img  width="480" height="270" id="work${index}" src="${work.src}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
+                                                    `;
+                }
+                else {
+                    card.innerHTML = `
+                                                                 <a href="${work.url}" target = "_blank" title = "觀看影片">
+                                                                     <div class = "description">
+                                                                        <h2>${work.title}</h2>
+                                                                        <p>${work.description}</p>
+                                                                    </div>
+                                                                    <img  width="480" height="270" id="work${index}" src="${work.cover}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
+                                                                </a>
+
+                                                                `;
+                }
                 container.appendChild(card);
             });
             document.querySelectorAll(".description").forEach((overlay, index) => {
-                overlay.onclick = () => goFullscreen(index);
-            });
-
-            document.addEventListener("fullscreenchange", () => {
-                if (!document.fullscreenElement) {
-                    document.querySelectorAll("video").forEach(v => v.pause());
-                }
+                overlay.addEventListener("mousedown", (e) => {
+                    if (e.button == 2) {
+                        goFullscreen(index);
+                    }
+                });
             });
         }
-        function createFile() {
-            clear();
-            title.textContent = "多媒體設計類";
-            games.forEach((game, index) => {
-                const card = document.createElement("div");
-                card.className = "game-card";
-
-                card.innerHTML = `
-                                            <div class = "description" onclick = "window.open('${game.path}');">
-                                                <h2>${game.title}</h2>
-                                                <p>${game.description}</p>
-                                            </div>
-                                            <img  width="480" height="270" id="game${index}" src="${game.src}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
-                                    `;
-                container.appendChild(card);
-            });
-        }
-
 
         function goFullscreen(index) {
-            const video = document.getElementById(`video${index}`);
+            const video = document.getElementById(`work${index}`);
             if (video.requestFullscreen) {
                 video.requestFullscreen();
             } else if (video.webkitRequestFullscreen) {
@@ -135,10 +160,6 @@
             } else if (video.msRequestFullscreen) {
                 video.msRequestFullscreen();
             }
-        }
-        function clear() {
-            const container = document.getElementById("container");
-            container.innerHTML = null;
         }
     </script>
 </body>
