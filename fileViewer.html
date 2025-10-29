@@ -53,7 +53,7 @@
     </div>
 
     <div class="video-container" id="container"></div>
-    </div>
+
     <script>
         let videos = [], games = [], medias = [];
         const container = document.getElementById("container");
@@ -85,15 +85,13 @@
             type.forEach((video, index) => {
                 const card = document.createElement("div");
                 card.className = "video-card";
-
-                const newUrl = video.url.replace('youtube', 'youtube-nocookie');
                 card.innerHTML = `
                                                  <a href="${video.url}">
                                                      <div class = "description">
                                                         <h2>${video.title}</h2>
                                                         <p>${video.description}</p>
                                                     </div>
-                                                    <iframe  width="480" height="270" id="video${index}" src="${video.cover}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
+                                                    <img  width="480" height="270" id="video${index}" src="${video.cover}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
                                                 </a>
 
                                                 `;
@@ -121,7 +119,7 @@
                                                 <h2>${game.title}</h2>
                                                 <p>${game.description}</p>
                                             </div>
-                                            <iframe  width="480" height="270" id="game${index}" src="${game.src}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
+                                            <img  width="480" height="270" id="game${index}" src="${game.src}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
                                     `;
                 container.appendChild(card);
             });
