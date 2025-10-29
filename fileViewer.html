@@ -52,7 +52,7 @@
         <h1 id="title"></h1>
     </div>
     <div class="video-container" id="container"></div>
-
+    </div>
     <script>
         let videos = [], games = [], medias = [];
         const container = document.getElementById("container");
@@ -60,7 +60,7 @@
         fetch('https://raw.githubusercontent.com/AkiYaSshi/file-reviewer/master/works.json')
             .then(response => {
                 if (!response.ok) {
-                    
+
                 }
                 return response.json();
             })
@@ -74,7 +74,7 @@
             .catch(error => {
                 console.error("載入 JSON 失敗：", error);
                 title.textContent = "載入失敗";
-                container.innerHTML = "<p style='color:red;'>無法載入作品資料</p>";
+                container.innerHTML = "<p style='color:grey;'>無法載入作品資料</br>請工作人員聯繫網站程式</p>";
             });
         // 動態生成影片卡片
 
@@ -87,12 +87,12 @@
 
                 const newUrl = video.url.replace('youtube', 'youtube-nocookie');
                 card.innerHTML = `
-                                            <div class = "description">
-                                                <h2>${video.title}</h2>
-                                                <p>${video.description}</p>
-                                            </div>
-                                            <iframe width = "480" height = "270" id="video${index}" src="${newUrl}"title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style = "border-radius: 10px"></iframe>
-                                            `;
+                                                <div class = "description">
+                                                    <h2>${video.title}</h2>
+                                                    <p>${video.description}</p>
+                                                </div>
+                                                <iframe width = "480" height = "270" id="video${index}" src="${newUrl}"title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style = "border-radius: 10px"></iframe>
+                                                `;
                 container.appendChild(card);
             });
             document.querySelectorAll(".description").forEach((overlay, index) => {
@@ -113,14 +113,13 @@
                 card.className = "game-card";
 
                 card.innerHTML = `
-                                        <div class = "description">
-                                            <h2>${game.title}</h2>
-                                            <p>${game.description}</p>
-                                        </div>
-                                        <iframe  width="480" height="270" id="game${index}" src="${game.src}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
-                                `;
+                                            <div class = "description" onclick = "window.open(${game.path});">
+                                                <h2>${game.title}</h2>
+                                                <p>${game.description}</p>
+                                            </div>
+                                            <iframe  width="480" height="270" id="game${index}" src="${game.src}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
+                                    `;
                 container.appendChild(card);
-
             });
         }
 
@@ -134,7 +133,6 @@
             } else if (video.msRequestFullscreen) {
                 video.msRequestFullscreen();
             }
-            video.playVideo();
         }
         function clear() {
             const container = document.getElementById("container");
