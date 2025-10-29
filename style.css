@@ -1,4 +1,23 @@
-﻿body {
+﻿@font-face {
+	font-family: 'king';
+	src: 
+		local("王漢宗特黑體繁"), 
+		url("fonts/王漢宗特黑體繁.ttf");
+	font-weight: bold;
+}
+@font-face {
+	font-family: 'thin-king';
+	src: 
+		local("王漢宗細黑體繁"), 
+		url("fonts/王漢宗細黑體繁.ttf");
+	font-weight: normal;
+}
+
+body * {
+	font-family: 'king';
+}
+
+body {
     min-height: 100vh; /* 確保 body 高度等於視窗高度 */
     margin: 10px; /* 外距 */
     box-sizing: border-box;
