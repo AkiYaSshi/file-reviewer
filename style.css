@@ -26,7 +26,9 @@ body {
     font-family: Arial, sans-serif;
     color: #333; /* 文字顏色，確保對比度 */
     background: #fff8f4;
+    background-image: url('UI/米白色紋理.webp');
 }
+
 .navigation-overlay{
     position:fixed;
     display:none;
@@ -38,6 +40,7 @@ body {
     background-color:#6f6f6fcc;
     backdrop-filter:blur(2px);
 }
+
     .navigation-overlay .overlay-text h3 {
         position: fixed;
         display: flex;
@@ -63,23 +66,38 @@ body {
 }
 
 .sidebar {
-    z-index:3;
+    z-index: 3;
     position: fixed;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    overflow-x:hidden;
+    overflow-x: hidden;
     top: 0;
     left: 0;
     height: 100%;
     width: 35px;
+    overflow-y: auto;
+    scrollbar-width: none;
     background: linear-gradient(to bottom, #9f573e, #7b3c2c);
     padding: 25px 20px;
     transition: all 0.2s ease;
 }
-.sidebar:hover {
-
+.sidebar-background {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 35px;
+    flex-direction: column;
+    padding: 25px 20px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    background-image: url('UI/咖啡底紋理.png');
+    transition: all 0.2s ease;
+}
+.sidebar:hover,
+.sidebar:hover .sidebar-background {
     width: 230px;
-
 }
 .sidebar-header{
     display: flex;
@@ -205,15 +223,6 @@ body {
     color: white;
     margin: 10px
 }
-
-video {
-    display: inline;
-    width: 100%;
-    /*            max-width: 300px;
-            margin-top: 10px;*/
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 陰影效果 */
-}
 .help-bar {
     z-index: 4;
     position: fixed;
@@ -221,6 +230,7 @@ video {
     left: 89vw;
 }
     .help-bar .help-button span {
+        pointer-events:none;
         display: flex;
         align-items: center;
         justify-content:center;
@@ -231,6 +241,11 @@ video {
     z-index:-1;
 }
 
+::selection {
+    background-color: #9f573e;
+    color: #fff8f4;
+}
+
 /* 針對小螢幕 */
 @media screen and (max-width: 600px) {
     body {
@@ -239,23 +254,19 @@ video {
         font-size: 16px;
     }
 
-    .video-card,
-    .game-card {
+    .work-card {
         max-width: 100%; /* 小螢幕時卡片寬度佔滿 */
     }
 
-        .video-card h2,
-        .game-card h2{
+        .work-card h2 {
             font-size: 16px;
         }
 
-        .video-card p,
-        .game-card p{
+        .work-card p {
             font-size: 14px;
         }
 
-        .video-card button,
-        .game-card button{
+        .work-card button {
             font-size: 14px;
         }
 }
@@ -268,13 +279,11 @@ video {
         font-size: 18px;
     }
 
-    .video-card h2,
-    .game-card h2{
+    .work-card h2 {
         font-size: 20px;
     }
 
-    .video-card p,
-    .game-card p{
+    .work-card p {
         font-size: 16px;
     }
 }
