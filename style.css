@@ -25,6 +25,7 @@ body {
     font-size: max(16px, 1.5vw); /* 字體最小值 */
     font-family: Arial, sans-serif;
     color: #333; /* 文字顏色，確保對比度 */
+    background: #fff8f4;
 }
 .top-bar {
     z-index: 2;
@@ -48,7 +49,7 @@ body {
     left: 0;
     height: 100%;
     width: 35px;
-    background: #290b10;
+    background: linear-gradient(to bottom, #9f573e, #7b3c2c);
     padding: 25px 20px;
     transition: all 0.2s ease;
 }
