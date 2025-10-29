@@ -6,6 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "方案項目", "方案項目", "{8DDC4786-5FC8-F15C-1CA5-9F41FD4BEB75}"
 	ProjectSection(SolutionItems) = preProject
 		fileViewer.html = fileViewer.html
+		style.css = style.css
+		works.json = works.json
+	EndProjectSection
+	ProjectSection(FolderGlobals) = preProject
+		C_5_4Users_4user_4Desktop_4Repository_4file-reviewer_4works_1json__JsonSchema = https://4lando.github.io/lando-spec/landofile-spec.json
 	EndProjectSection
 EndProject
 Global
