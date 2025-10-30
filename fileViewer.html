@@ -108,11 +108,13 @@
                 createWorks(videos, videoContainer, "video_");
                 createWorks(games, gameContainer, "game_");
                 createWorks(medias, mediaContainer, "media_");
+
+                window.location.hash = (window.location.hash == "") ? '#video-container' : window.location.hash;
             })
             .catch(error => {
                 console.error("載入 JSON 失敗：", error);
                 title.textContent = "載入失敗";
-                nowContainer.innerHTML = "<p style='color:grey;'>無法載入作品資料</br>請工作人員聯繫網站程式</p>";
+                nowContainer.innerHTML = "<p style='color:grey;'>無法載入作品資料</br>請聯繫網站程式</p>";
             });
         // 動態生成影片卡片
 
