@@ -86,6 +86,19 @@
     <script>
         let videos = [], games = [], medias = [];
         let nowContainer;
+        const path = ["windows\\RhythmSync.exe",
+            "EcoHoops_Windows\\EcoHoops.exe",
+            "七日_作品檔案.html",
+            "",
+            "VR_Music_Game.exe",
+            "rps-showdown\\rps-showdown.exe",
+            "index.html",
+            'LITM_v02\\Leave It To Me.exe',
+            'Ultimate Delivery Rider.exe',
+            "build7\\DesignYourLife.exe",
+            "puff-bump\\puff-bump.exe",
+            "EchosBetween\\EchosBetween.exe",
+            '閾限 LIMINAL SPACE\\LIMINAL SPACE.exe'];
 
         const videoContainer = document.getElementById("video-container");
         const gameContainer = document.getElementById("game-container");
@@ -126,12 +139,14 @@
 
 
                 if (type == games) {
-                    card.innerHTML = `
-                                                            <div class = "description" title = "開啟遊戲檔案位置" onclick = "window.open('${work.path}');">
-                                                                <h2>${work.title}</h2>
-                                                                <p>${work.description}</p>
-                                                            </div>
-                                                            <img  width="480" height="270" id="${name}${index}" src="${work.src}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
+                    //${ path[index] }
+                    card.innerHTML = `                      <a href="sp://'C:\\Users\\user\\Desktop\\3DGameMid\\assets'" target="_blank">
+                                                                <div class = "description" title = "開啟遊戲檔案位置">
+                                                                    <h2>${work.title}</h2>
+                                                                    <p>${work.description}</p>
+                                                                </div>
+                                                                <img  width="480" height="270" id="${name}${index}" src="${work.src}" frameborder="0" scrolling="no" allowfullscreen ></iframe>
+                                                            </a>
                                                     `;
                 }
                 else {
