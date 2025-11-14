@@ -36,21 +36,21 @@
             <ul class="sidebar-links">
                 <h4>作品分類</h4>
                 <li>
-                    <a href="#video-container">
+                    <a id="to-video">
                         <span class="material-symbols-outlined">
                             movie
                         </span>動畫藝術類
                     </a>
                 </li>
                 <li>
-                    <a href="#game-container">
+                    <a id="to-game">
                         <span class="material-symbols-outlined">
                             stadia_controller
                         </span>多媒體設計類
                     </a>
                 </li>
                 <li>
-                    <a href="#media-container">
+                    <a id="to-new">
                         <span class="material-symbols-outlined">
                             head_mounted_device
                         </span>新媒體藝術類
@@ -86,19 +86,22 @@
     <script>
         let videos = [], games = [], medias = [];
         let nowContainer;
-        const path = ["windows\\RhythmSync.exe",
-            "EcoHoops_Windows\\EcoHoops.exe",
-            "七日_作品檔案.html",
+
+        const paths = ["windows\\",
+            "EcoHoops_Windows\\",
             "",
-            "VR_Music_Game.exe",
-            "rps-showdown\\rps-showdown.exe",
-            "index.html",
-            'LITM_v02\\Leave It To Me.exe',
-            'Ultimate Delivery Rider.exe',
-            "build7\\DesignYourLife.exe",
-            "puff-bump\\puff-bump.exe",
-            "EchosBetween\\EchosBetween.exe",
-            '閾限 LIMINAL SPACE\\LIMINAL SPACE.exe'];
+            "",
+            "",
+            "rps-showdown\\",
+            "",
+            "",
+            'LITM_v02\\',
+            '',
+            "build7\\",
+            "puff-bump\\",
+            "EchoesBetween\\",
+            'LIMINAL SPACE\\'];
+        const start = "C:\\Users\\user\\ex-games";
 
         const videoContainer = document.getElementById("video-container");
         const gameContainer = document.getElementById("game-container");
@@ -107,6 +110,15 @@
         const title = document.getElementById("title");
 
         nowContainer = videoContainer;
+
+        const videoBtn = document.getElementById("to-video");
+        const gameBtn = document.getElementById("to-game");
+        const newBtn = document.getElementById("to-new");
+
+        videoBtn.addEventListener('click', () => SetHash("#video-container"));
+        gameBtn.addEventListener('click', () => SetHash("#game-container"));
+        newBtn.addEventListener('click', () => SetHash("#media-container"));
+
         fetch('https://raw.githubusercontent.com/AkiYaSshi/file-reviewer/master/works.json')
             .then(response => {
                 if (!response.ok) {
@@ -139,8 +151,8 @@
 
 
                 if (type == games) {
-                    //${ path[index] }
-                    card.innerHTML = `                      <a href="sp://'C:\\Users\\user\\Desktop\\3DGameMid\\assets'" target="_blank">
+                    //${start}${index}${path[index]}
+                    card.innerHTML = `                      <a href='${start}\\${index}\\${paths[index]}' target="_blank">
                                                                 <div class = "description" title = "開啟遊戲檔案位置">
                                                                     <h2>${work.title}</h2>
                                                                     <p>${work.description}</p>
@@ -189,6 +201,15 @@
             else {
                 obj.style.display = 'none';
             }
+        }
+
+        function SetHash(target) {
+            if (window.location.hash != target) {
+                window.location.hash = target;
+                console.log(`go to ${target}`);
+                return;
+            }
+            console.log(`stay at ${target}`);
         }
     </script>
 </body>
